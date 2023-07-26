@@ -3,8 +3,6 @@ from thermo import *
 from state import *
 import os
 
-
-
 class Sweep:
    '''
    '''
@@ -34,13 +32,16 @@ class Sweep:
 
       os.chdir(old_cwd)
 
-   def summary(self, l):
+   def summary(self, l, index = False):
       n = len(l)
 
       summary = []
 
       for i in range(0, len(self.sweep)):
-         s = [i]
+         if index == True:
+            s = [i]
+         else:
+            s = []
          for j in range(0, n):
             a = self.sweep[i]
             string = 'a.' + l[j]
@@ -122,9 +123,14 @@ class Sweep:
 
       return summaryString
 
+   def __getitem__(self, key):
+      return self.sweep[key]
+
 s = Sweep('100')
 # s = Sweep('param100up')
-print(s.summary(['param.Mixture.ds', 'thermo.pressure', 'param.Domain.mode']))
+# print(s.summary(['param.Mixture.ds', 'thermo.pressure', 'param.Domain.mode']))
+print(s[0])
+print(s.summary(['param.Mixture.ds', 'thermo.pressure', 'param.Domain.mode'], index = True))
 print(s.summaryString(['param.Mixture.ds', 'thermo.pressure', 'param.Domain.mode']))
 
 
