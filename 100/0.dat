@@ -1,0 +1,63 @@
+System{
+  Mixture{
+    nMonomer                               2
+    monomers[           
+                         1.00000000e+00
+                         1.00000000e+00
+    ]
+    nPolymer                               1
+    nSolvent                               1
+    Polymer{
+      type                              linear
+      nBlock                                 1
+      blocks[             
+                                              0    1.000000000000e+02
+      ]
+      phi                   1.000000000000e-02
+    }
+    Solvent{
+      monomerId                              1
+      size                  1.000000000000e+00
+      phi                   9.900000000000e-01
+    }
+    vMonomer              1.000000000000e+00
+    ds                    5.000000000000e-02
+  }
+  Interaction{
+    chi(                
+                           0    0   0.000000000000e+00
+                           1    0   1.000000000000e+00
+                           1    1   0.000000000000e+00
+    )
+  }
+  Domain{
+    mode                           spherical
+    isShell                                0
+    xMax                  2.879411911000e+01
+    nx                                   401
+  }
+  NrIterator{
+    epsilon               1.000000000000e-06
+  }
+  Sweep{
+    ns                                   100
+    baseFileName                     out/up/
+    nParameter                             1
+    parameters[         
+                                         chi  1 0 1.000000000000e+00
+    ]
+  }
+}
+
+
+fHelmholtz  -9.91871799498e-01
+pressure     9.99848890041e-01
+
+Polymers:
+    i        phi[i]              mu[i]       
+    0   1.00000000000e-02   7.97709213723e+01
+
+Solvents:
+    i        phi[i]              mu[i]       
+    0   9.90000000000e-01  -1.61011548668e-09
+
