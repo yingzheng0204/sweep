@@ -14,8 +14,14 @@ class Sweep:
          os.chdir(d)
       elif os.path.isfile(d) == True:
          p = Composite(d)
-         nd = old_cwd + '/' + p.Sweep.baseFileName
-         os.chdir(nd)
+         for x,y in p.children.items():
+            if x.rfind('Sweep') != -1:
+               nd = old_cwd + '/' + y.baseFileName
+               break
+         try:
+            os.chdir(nd)
+         except:
+            raise Exception('No Sweep block in the Param file')
       else:
          raise Exception('Not valid argument')
 
@@ -90,7 +96,7 @@ class Sweep:
             length = len(str(summary[i][j]))
             if (valType[i][j] == str) and (length > nl[j]):
                nl[j] = length
-            if (valType[i][j] == float) and (length > nl[j]):
+            if (valType[i][j] == float) and (13 > nl[j]):
                nl[j] = 13
             if (valType[i][j] == int) and (length > nl[j]):
                nl[j] = length
@@ -126,12 +132,12 @@ class Sweep:
    def __getitem__(self, key):
       return self.sweep[key]
 
-s = Sweep('100')
-# s = Sweep('param100up')
+# s = Sweep('100')
+s = Sweep('param100up')
 # print(s.summary(['param.Mixture.ds', 'thermo.pressure', 'param.Domain.mode']))
 print(s[0])
 print(s.summary(['param.Mixture.ds', 'thermo.pressure', 'param.Domain.mode'], index = True))
-print(s.summaryString(['param.Mixture.ds', 'thermo.pressure', 'param.Domain.mode']))
+print(s.summaryString(['param.Interaction.chi[0][1]', 'thermo.pressure', 'param.Domain.mode']))
 
 
 
